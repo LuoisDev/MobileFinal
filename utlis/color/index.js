@@ -1,0 +1,16 @@
+export const Colors = {
+  background: 'rgb(47,172,79)',
+  white: '#ffffff',
+  black: 'black',
+  danger: 'red',
+  gray: 'rgba(0, 0, 25, 0.22)',
+  blue: 'rgb(0,138,238)',
+  waiting: 'rgb(69,89,151)',
+  itemInActive: '#929292',
+  backgroundInActive: '#EDEBEC',
+  ink100: '#0112220C',
+  ink200: '#01122219',
+  ink300: '#0112224C',
+  ink400: '#0112227F',
+  ink500: '#22313F',
+};

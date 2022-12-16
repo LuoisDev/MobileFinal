@@ -10,7 +10,9 @@ import {
   Alert,
 } from 'react-native';
 import axios from 'axios';
-
+import {useSelector, useDispatch} from 'react-redux';
+import {updateEmail} from '../redux/userEmail';
+import {updateUsername} from '../redux/userName';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -29,7 +31,7 @@ const Login = props => {
   const [errNew, setErrNew] = useState('');
   const {navigation} = props;
   const isValidEmail = value => value && value.indexOf('@') > 0;
-
+  const dispatch = useDispatch();
   const onRegister = () => {
     navigation.navigate(langs.navigator.register);
   };
@@ -67,9 +69,11 @@ const Login = props => {
           headers: {'Content-Type': 'multipart/form-data'},
         })
         .then(res => {
-          console.log('res', res.data);
+          console.log('res', res.data.users[0].name);
           if (res.data.status) {
-            navigation.navigate('Home');
+            navigation.navigate('Tabs');
+            dispatch(updateEmail(email));
+            dispatch(updateUsername(res.data.users[0]));
           } else {
             Alert.alert('Thông báo', 'Không tìm thấy tài khoản');
           }

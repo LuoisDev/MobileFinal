@@ -10,6 +10,8 @@ import {
 import axios from 'axios';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {BASE_URL, Colors, imgs} from '../utlis';
+import {selectUsername} from '../redux/userName';
+import {useSelector, useDispatch} from 'react-redux';
 
 import {Header, Input, Button} from '../component';
 function AddStory({route, navigation}) {
@@ -17,6 +19,7 @@ function AddStory({route, navigation}) {
   const onGoBack = () => {
     navigation.goBack();
   };
+  const userName = useSelector(selectUsername);
 
   const onAddStory = async () => {
     let formData = new FormData();
@@ -26,6 +29,7 @@ function AddStory({route, navigation}) {
     formData.append('maloai', maloai);
     formData.append('gia', price);
     formData.append('mota', descriptionLink);
+    formData.append('email', userName.email);
 
     console.log('formData', formData);
     await axios
@@ -54,8 +58,7 @@ function AddStory({route, navigation}) {
     setPrice(val);
     if (val === '' && price !== '') {
       setPriceErr('Không được để trống giá');
-    } else if (val.trim().length > 0 && val.trim().length < 8 && price !== '') {
-      setPriceErr('Link quá ngắn');
+    
     } else {
       setPriceErr('');
     }
@@ -118,10 +121,6 @@ function AddStory({route, navigation}) {
     }
     if (price === '') {
       setPriceErr('Không được để trống giá');
-      return;
-    }
-    if (price.trim().length > 0 && price.trim().length < 8) {
-      setPriceErr('Giá quá bé');
       return;
     }
     Keyboard.dismiss();

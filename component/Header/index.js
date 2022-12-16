@@ -10,8 +10,8 @@ import {
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import LinearGradient from 'react-native-linear-gradient';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { imgs } from '../../utlis';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {imgs} from '../../utlis';
 
 HeaderCustom.defaultProps = {
   width: wp(100),
@@ -57,17 +57,19 @@ export default function HeaderCustom(props?: Props) {
         containerStyle,
       ]}>
       <View style={styles.viewRow}>
-        <TouchableOpacity onPress={goBack} style={styles.button}>
-          {/* <Image source={leftImage} style={styles.image} resizeMode="contain" /> */}
-          <Image
-            source={imgs.returnIcon}
-            style={styles.image}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
+        {goBack ? (
+          <TouchableOpacity onPress={goBack} style={styles.button}>
+            {/* <Image source={leftImage} style={styles.image} resizeMode="contain" /> */}
+            <Image
+              source={imgs.returnIcon}
+              style={styles.image}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        ) : null}
         <View style={styles.viewMiddle}>
           <Text
-            style={[styles.title, {fontSize: wp(100) < 400 ? 18 : 24}]}
+            style={[styles.title, {marginLeft: goBack ? 0:48, fontSize: wp(100) < 400 ? 18 : 24}]}
             {...otherProps}>
             {title}
           </Text>

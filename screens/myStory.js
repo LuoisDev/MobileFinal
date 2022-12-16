@@ -24,16 +24,16 @@ import {useSelector, useDispatch} from 'react-redux';
 import {selectUsername} from '../redux/userName';
 
 import {Header, Input} from '../component';
-function DetailCategory({route, navigation}) {
-  const userName = useSelector(selectUsername);
-
-  const {maloai, tenloai} = route.params;
-  console.log('maloai', maloai, tenloai);
+function MyStory({route, navigation}) {
+  const {maloai} = route.params;
+  console.log('maloai', maloai);
   const [data, setData] = useState([]);
   const [defaultData, setDefaultData] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const isFocused = useIsFocused();
   const [isLike, setLike] = useState(false);
+  const userName = useSelector(selectUsername);
+
   const onGoBack = () => {
     navigation.goBack();
   };
@@ -42,19 +42,20 @@ function DetailCategory({route, navigation}) {
     onGetDetail();
   }, [isFocused]);
   const onGetDetail = async () => {
-    let formData = new FormData();
-    formData.append('maloai', maloai);
     await axios
-      .post(`${BASE_URL}/select_truyen.php`, formData, {
+      .post(`${BASE_URL}/select_alltruyen.php`, {
         headers: {'Content-Type': 'multipart/form-data'},
       })
       .then(res => {
-        console.log('res detail', res.data.truyen);
+        console.log('res detail phong', res.data.loaitruyen);
         const final = [];
-        res.data.truyen.forEach(i =>
-          i.email !== userName.email ? final.push(i) : null,
+        res.data.loaitruyen.forEach(i =>
+          i.email == userName.email ? final.push(i) : null,
         );
+        console.log('final', final);
+
         setData(final);
+        console.log('alpha', data);
         setRefresh(false);
         setDefaultData(final);
         // if (res.data.status) {
@@ -74,9 +75,10 @@ function DetailCategory({route, navigation}) {
     onGetDetail();
   };
   const onMoveDetailStory = item => {
-    navigation.navigate('DetailStory', {item: item});
+    navigation.navigate('MyDetailStory', {item: item});
   };
   const renderItem = ({item, index}) => {
+    console.log('alpha', item);
     return (
       <TouchableOpacity onPress={() => onMoveDetailStory(item)}>
         <View style={styles.card}>
@@ -133,7 +135,7 @@ function DetailCategory({route, navigation}) {
   };
   const [name, setName] = useState('');
   const onMoveToAddStory = () => {
-    navigation.navigate('MyStory', {maloai: maloai});
+    navigation.navigate('AddStory', {maloai: maloai});
   };
   const convertViToEn = (str, toUpperCase = false) => {
     str = str.toLowerCase();
@@ -169,7 +171,7 @@ function DetailCategory({route, navigation}) {
   };
   return (
     <>
-      <Header title={`Truyện ${tenloai}`} goBack={onGoBack} shadow />
+      <Header title={'Truyện của tôi'} goBack={onGoBack} shadow />
       <View style={styles.detail}>
         <Input
           button
@@ -190,33 +192,14 @@ function DetailCategory({route, navigation}) {
             <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
           }
         />
-        {/* <ActionButton
+        <ActionButton
           buttonColor={Colors.white}
           onPress={onMoveToAddStory}
           degrees={45}
           fixNativeFeedbackRadius
           renderIcon={buttonIcon}
           style={[Platform.OS === 'ios' ? {zIndex: 100} : {elevation: 100}]}
-        /> */}
-        <ActionButton
-          buttonColor="white"
-          renderIcon={buttonIcon}
-          style={[
-            styles.actonButton,
-            Platform.OS === 'ios' ? {zIndex: 100} : {elevation: 100},
-          ]}
-          degrees={90}
-          fixNativeFeedbackRadius>
-          <ActionButton.Item
-            inputX={[0, 0]}
-            outputX={[0, 0]}
-            inputY={[0, 1]}
-            outputY={[0, -70]}
-            title={'Truyện của tôi'}
-            onPress={onMoveToAddStory}>
-            <Image source={imgs.stampCheck} />
-          </ActionButton.Item>
-        </ActionButton>
+        />
       </View>
     </>
   );
@@ -275,4 +258,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DetailCategory;
+export default MyStory;

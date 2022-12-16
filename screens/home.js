@@ -28,9 +28,7 @@ function HomeScreen({navigation}) {
   const [refresh, setRefresh] = useState(false);
   const isFocused = useIsFocused();
 
-  const onGoBack = () => {
-    navigation.goBack();
-  };
+ 
   useEffect(() => {
     onGetDetail();
   }, [isFocused]);
@@ -129,7 +127,7 @@ function HomeScreen({navigation}) {
   };
   return (
     <>
-      <Header title="Thể loại" goBack={onGoBack} shadow />
+      <Header title="Thể loại" shadow />
       <View style={styles.detail}>
         <Input
           button
@@ -153,14 +151,14 @@ function HomeScreen({navigation}) {
             <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
           }
         />
-        <ActionButton
+        {/* <ActionButton
           buttonColor={Colors.white}
           onPress={onMoveToAddCategory}
           degrees={45}
           fixNativeFeedbackRadius
           renderIcon={buttonIcon}
           style={[Platform.OS === 'ios' ? {zIndex: 100} : {elevation: 100}]}
-        />
+        /> */}
       </View>
     </>
   );

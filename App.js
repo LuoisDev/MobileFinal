@@ -18,6 +18,7 @@ import MyTabs from './tabbar';
 import CartScreen from './screens/cart';
 import Register from './screens/register';
 import MyDetailStory from './screens/myDetailStory';
+import ChangePass from './screens/changePass';
 export default function App() {
   return (
     <SafeAreaProvider>
@@ -40,6 +41,8 @@ export default function App() {
             <Stack.Screen name="MyDetailStory" component={MyDetailStory} />
             <Stack.Screen name="MyWeb" component={MyWeb} />
             <Stack.Screen name="MyStory" component={MyStory} />
+            <Stack.Screen name="ChangePass" component={ChangePass} />
+
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

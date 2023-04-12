@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   Text,
   View,
@@ -8,35 +9,24 @@ import {
   StatusBar,
   Platform,
   Keyboard,
+  Alert,
 } from 'react-native';
-import { InputPassword, HeaderCustom, BarStatus } from '../../../component';
-import { Button } from '../../../component/Button';
-import { Colors, imgs } from '../../../../utlis/index';
-import langs from '../../../../common/language/index';
-import { _global } from '../../../../utlis/global/global';
-
-const ChangePass = (props) => {
-  const { token, changePass, navigation } = props;
+import {Button, Header, InputPassword} from '../component';
+import langs from '../langs';
+import {BASE_URL, Colors, imgs} from '../utlis';
+import {useSelector, useDispatch} from 'react-redux';
+import {selectUsername} from '../redux/userName';
+const ChangePass = props => {
+  const {token, changePass, navigation} = props;
   const refNew = useRef(null);
   const refConfirm = useRef(null);
   const refRecent = useRef(null);
-  useEffect(() => {
-    if (Platform.OS === 'android') {
-      refNew.current.setNativeProps({
-        style: { fontFamily: 'Quicksand-Regular' },
-      });
-      refConfirm.current.setNativeProps({
-        style: { fontFamily: 'Quicksand-Regular' },
-      });
-      refRecent.current.setNativeProps({
-        style: { fontFamily: 'Quicksand-Regular' },
-      });
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   const onGoBack = () => {
     navigation.goBack();
   };
+  const userName = useSelector(selectUsername);
 
   const [recentPass, setRecentPass] = useState('');
   const [newPass, setNewPass] = useState('');
@@ -44,14 +34,14 @@ const ChangePass = (props) => {
   const [errRecent, setErrRecent] = useState('');
   const [errNew, setErrNew] = useState('');
   const [errConfirm, setErrConfirm] = useState('');
-  const onChangeRecent = (val) => {
+  const onChangeRecent = val => {
     setRecentPass(val);
     if (val === '' && errRecent !== '') {
       setErrRecent(langs.alert.invalidPassword2);
     } else if (
-      val.trim().length > 0
-      && val.trim().length < 8
-      && (errRecent !== '' || errNew !== '' || errConfirm !== '')
+      val.trim().length > 0 &&
+      val.trim().length < 8 &&
+      (errRecent !== '' || errNew !== '' || errConfirm !== '')
     ) {
       setErrRecent(langs.alert.lessPassword2);
     } else {
@@ -59,14 +49,14 @@ const ChangePass = (props) => {
     }
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
   };
-  const onChangeNew = (val) => {
+  const onChangeNew = val => {
     setNewPass(val);
     if (val === '' && errNew !== '') {
       setErrNew(langs.alert.invalidReNewPassword2);
     } else if (
-      val.trim().length > 0
-      && val.trim().length < 8
-      && (errRecent !== '' || errNew !== '' || errConfirm !== '')
+      val.trim().length > 0 &&
+      val.trim().length < 8 &&
+      (errRecent !== '' || errNew !== '' || errConfirm !== '')
     ) {
       setErrNew(langs.alert.lessReNewPassword2);
     } else {
@@ -74,19 +64,19 @@ const ChangePass = (props) => {
     }
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
   };
-  const onChangeConfirm = (val) => {
+  const onChangeConfirm = val => {
     setConfirmPass(val);
     if (val === '' && errConfirm !== '') {
       setErrConfirm(langs.alert.invalidRePassword2);
     } else if (
-      val.trim().length > 0
-      && val.trim().length < 8
-      && (errRecent !== '' || errNew !== '' || errConfirm !== '')
+      val.trim().length > 0 &&
+      val.trim().length < 8 &&
+      (errRecent !== '' || errNew !== '' || errConfirm !== '')
     ) {
       setErrConfirm(langs.alert.lessRePassword2);
     } else if (
-      val !== newPass
-      && (errRecent !== '' || errNew !== '' || errConfirm !== '')
+      val !== newPass &&
+      (errRecent !== '' || errNew !== '' || errConfirm !== '')
     ) {
       setErrConfirm(langs.alert.notCoincideRepass);
     } else {
@@ -97,18 +87,18 @@ const ChangePass = (props) => {
 
   const onCheck = () => {
     if (
-      recentPass === ''
-      || (recentPass.trim().length > 0 && recentPass.trim().length < 8)
-      || newPass === ''
-      || (newPass.trim().length > 0 && newPass.trim().length < 8)
-      || confirmPass === ''
-      || (confirmPass.trim().length > 0 && confirmPass.trim().length < 8)
-      || confirmPass !== newPass
+      recentPass === '' ||
+      (recentPass.trim().length > 0 && recentPass.trim().length < 5) ||
+      newPass === '' ||
+      (newPass.trim().length > 0 && newPass.trim().length < 8) ||
+      confirmPass === '' ||
+      (confirmPass.trim().length > 0 && confirmPass.trim().length < 8) ||
+      confirmPass !== newPass
     ) {
       if (recentPass === '') {
         setErrRecent(langs.alert.invalidPassword2);
       }
-      if (recentPass.trim().length > 0 && recentPass.trim().length < 8) {
+      if (recentPass.trim().length > 0 && recentPass.trim().length < 5) {
         setErrRecent(langs.alert.lessPassword2);
       }
       if (newPass.trim().length === 0) {
@@ -131,34 +121,37 @@ const ChangePass = (props) => {
       onChangePass();
     }
   };
-  const onChangePass = () => {
-    const data = {
-      old_password: recentPass,
-      password: newPass,
-      confirm_password: confirmPass,
-      token,
-    };
+  const onChangePass = async () => {
+    let formData = new FormData();
+    formData.append('email', userName.email);
+    formData.append('oldpassword', recentPass);
+    formData.append('newpassword', newPass);
 
+    await axios
+      .post(`${BASE_URL}/update_password.php`, formData, {
+        headers: {'Content-Type': 'multipart/form-data'},
+      })
+      .then(res => {
+      navigation.goBack();
+      Alert.alert('Thông báo', 'Đổi mật khẩu thành công');
+        // setPhoto(res.data.photo.photo);
+      })
+      .catch(err => {
+        Alert.alert('Thông báo', 'Vui lòng kiểm tra lại kết nối mạng');
+        console.log('err', err.response);
+      });
     errRecent === '' && errNew === '' && errConfirm === ''
       ? changePass(data)
       : null;
   };
   return (
-    <View style={{ backgroundColor: 'white', ...StyleSheet.absoluteFill }}>
+    <View style={{backgroundColor: 'white', ...StyleSheet.absoluteFill}}>
       {/* <BarStatus
         backgroundColor={Colors.white}
         height={Platform.OS === 'ios' ? 26 : StatusBar.currentHeight}
       /> */}
 
-      <HeaderCustom
-        title={langs.navigator.changePass}
-        height={60}
-        goBack={onGoBack}
-        rightImage={imgs.settingICon}
-        shadow
-        // backgroundColor={'#F32013'}
-        // containerStyle={{backgroundColor: 'white'}}
-      />
+      <Header title="Đổi mật khẩu" shadow  goBack={onGoBack}  />
 
       <InputPassword
         placeholder={langs.recentPassWord}
@@ -230,7 +223,7 @@ const ChangePass = (props) => {
             : null
         }
         testID="test_Complete"
-        containerStyle={{ marginTop: errConfirm !== '' ? 8 : 36 }}
+        containerStyle={{marginTop: errConfirm !== '' ? 8 : 36}}
         backgroundColor={
           errRecent === '' && errNew === '' && errConfirm === ''
             ? Colors.background
@@ -241,19 +234,19 @@ const ChangePass = (props) => {
   );
 };
 const styles = StyleSheet.create({
-  textInput: { borderRadius: 32, alignSelf: 'center' },
-  container: { justifyContent: 'center', alignItems: 'center' },
+  textInput: {borderRadius: 32, alignSelf: 'center'},
+  container: {justifyContent: 'center', alignItems: 'center'},
   button: {
     marginTop: 36,
   },
-  textPass: { fontSize: 16, height: 24, marginTop: 4, marginLeft: 32 },
+  textPass: {fontSize: 16, height: 24, marginTop: 4, marginLeft: 32},
   textErr: {
     fontSize: 12,
     height: 24,
     marginTop: 4,
     color: '#F32013',
     alignSelf: 'center',
-    left: -24
+    left: -24,
   },
 });
 export default ChangePass;

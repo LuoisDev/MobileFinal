@@ -26,7 +26,7 @@ const deviceWidth = Dimensions.get('window').width;
 const Login = props => {
   const refPassword = useRef(null);
   const [email, setEmail] = useState('phong@gmail.com');
-  const [pass, setPass] = useState('123456');
+  const [pass, setPass] = useState('12345678');
   const [errMail, setErrMail] = useState('');
   const [errNew, setErrNew] = useState('');
   const {navigation} = props;
@@ -80,7 +80,7 @@ const Login = props => {
           // setPhoto(res.data.photo.photo);
         })
         .catch(err => {
-          Alert.alert('Thông báo', 'Vui lòng kiểm tra lại kết nối mạng');
+          Alert.alert('Thông báo', 'Vui lòng kiểm tra lại mật khẩu');
           console.log('err', err.response);
         });
     }

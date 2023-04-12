@@ -1,0 +1,588 @@
+{
+	"info": {
+		"_postman_id": "c1fb04c7-1094-4f46-a7d6-68f1b4b39ba3",
+		"name": "Story app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13983456"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "phong@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://10.10.50.64/api/login.php",
+					"protocol": "http",
+					"host": [
+						"10",
+						"10",
+						"50",
+						"64"
+					],
+					"path": [
+						"api",
+						"login.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "\u001dregister",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name ",
+							"value": "user",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "phong4@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "hinh ",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/register.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"register.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "infor",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "phong@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/getMyinfo.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"getMyinfo.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "phong@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "oldpassword",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "newpassword",
+							"value": "1234567",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/update_password.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"update_password.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllGioHang by Email",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "phong@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/getGioHangByEmail.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"getGioHangByEmail.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllGioHang",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "matruyen",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email ",
+							"value": "phong@gmail.com",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/select_giohang.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"select_giohang.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllGioHang Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "phong@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/select_loaitruyen.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"select_loaitruyen.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllGioHang Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tenloai",
+							"value": "phong@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "hinhloai",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/select_loaitruyen.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"select_loaitruyen.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllGioHang Copy 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tenloai",
+							"value": "phong@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "hinhloai",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/select_loaitruyen.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"select_loaitruyen.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllGioHang Copy 4",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tenloai",
+							"value": "phong@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "hinhloai",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/select_loaitruyen.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"select_loaitruyen.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllGioHang Copy 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tenloai",
+							"value": "phong@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "hinhloai",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/liketruyen.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"liketruyen.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllGioHang Copy 4",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tenloai",
+							"value": "phong@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "hinhloai",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/liketruyen.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"liketruyen.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllGioHang Copy 5",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "hsad",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tenloai",
+							"value": "phong@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "hinhloai",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/api/liketruyen.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"liketruyen.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "files[]",
+							"type": "file",
+							"src": "/Users/phong/Face-Recognization/resource/raw/DTPhong/313432318_868533381164859_2334192145106808389_n.jpg"
+						},
+						{
+							"key": "files",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9874/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9874",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

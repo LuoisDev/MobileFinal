@@ -37,11 +37,18 @@ function PerScreen({navigation}) {
           <Text>Giỏ hàng</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => navigation.navigate('ChangePass')}
+          style={styles.card}>
+          <Image style={{marginRight:24}} source={imgs.changePassIcon} />
+          <Text>Đổi mật khẩu</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
           onPress={() => navigation.navigate('Login')}
           style={styles.card}>
           <Image style={{marginRight:24}} source={imgs.logout} />
           <Text>Đăng xuất</Text>
         </TouchableOpacity>
+        
       </View>
     </>
   );

@@ -48,7 +48,6 @@ function CartScreen({route, navigation}) {
     setRefresh(true);
     getReview();
   };
-
   const getReview = async () => {
     let formData = new FormData();
     formData.append('email', userName.email);
@@ -122,22 +121,6 @@ function CartScreen({route, navigation}) {
   const ratingCompleted = rate => {
     console.log('rate', rate);
     setRating(rate);
-  };
-  const validURL = str => {
-    var pattern = new RegExp(
-      '^(https?:\\/\\/)?' + // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-        '(\\#[-a-z\\d_]*)?$',
-      'i',
-    ); // fragment locator
-    return !!pattern.test(str);
-  };
-  const openUrl = i => {
-    console.log('web view', i);
-    Linking.openURL(i);
   };
   return (
     <View style={{backgroundColor: Colors.white, flex: 1}}>
